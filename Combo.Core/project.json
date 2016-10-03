@@ -1,7 +1,23 @@
 {
   "version": "1.0.0-*",
+  "name": "Combo",
+  "title": "Combo",
+  "description": "A simple implementation of IoC container and dependency injection.",
+  "copyright": "Copyright © 2016 John Smith",
+  "authors": [ "John Smith" ],
   "buildOptions": {
-    "debugType": "portable"
+    "define": [ "NET_CORE" ],
+    "debugType": "portable",
+    "outputName": "Combo"
+  },
+  "packOptions": {
+    "tags": [
+      "IoC",
+      "Container",
+      "Dependency Injection"
+    ],
+    "projectUrl": "https://github.com/JohnSmithDr/Combo",
+    "licenseUrl": "https://raw.githubusercontent.com/JohnSmithDr/Combo/master/LICENSE"
   },
   "dependencies": {},
   "frameworks": {

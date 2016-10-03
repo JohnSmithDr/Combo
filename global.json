@@ -1,0 +1,6 @@
+{
+    "projects": [
+        "Combo.Core", 
+        "Combo.Core.Tests"
+    ]
+}

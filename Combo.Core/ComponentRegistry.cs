@@ -22,7 +22,8 @@ namespace Combo
 
         public EntryCollection GetEntries(Type type)
         {
-            return _dict[type];
+            EntryCollection coll;
+            return _dict.TryGetValue(type, out coll) ? coll : null;
         }
 
         public sealed class Entry

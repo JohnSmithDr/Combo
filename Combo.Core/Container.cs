@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Combo
 {
@@ -10,31 +11,26 @@ namespace Combo
 
         public static Container Default => _default.Value;
 
-        private readonly IDictionary<Type, Registry> _registry = 
-            new Dictionary<Type, Registry>();
+        private readonly ComponentRegistry _registry = new ComponentRegistry();
 
         public Container Register(Type type, object instance)
         {
             if (type == null)
-            {
                 throw new ArgumentNullException(nameof(type));
-            }
 
             if (instance == null)
-            {
                 throw new ArgumentNullException(nameof(instance));
-            }
 
             if (!instance.IsType(type))
-            {
-                throw new ArgumentException($"must be instance of type: {type}");
-            }
+                throw new ArgumentException($"Object must be instance of type: {type}");
 
-            _registry[type] = new Registry
+            _registry.AddEntry(new ComponentRegistry.Entry()
             {
+                Type = type,
                 Instance = instance,
-                Lifetime = Lifetime.Singleton
-            };
+                Lifetime = Lifetime.Singleton       
+            });
+
             return this;
         }
 
@@ -62,16 +58,15 @@ namespace Combo
         public Container Register<T>(Func<T> factory, Lifetime lifetime)
         {
             if (factory == null)
-            {
                 throw new ArgumentNullException(nameof(factory));
-            }
 
-            var type = typeof(T);
-            _registry[type] = new Registry
+            _registry.AddEntry(new ComponentRegistry.Entry()
             {
+                Type = typeof(T),
                 Lifetime = lifetime,
                 Factory = () => factory.Invoke()
-            };
+            });
+
             return this;
         }
 
@@ -99,50 +94,41 @@ namespace Combo
         public Container Register<I, T>(Func<T> factory, Lifetime lifetime) where T : I
         {
             if (factory == null)
-            {
                 throw new ArgumentNullException(nameof(factory));
-            }
 
-            var type = typeof(I);
-            _registry[type] = new Registry
+            _registry.AddEntry(new ComponentRegistry.Entry()
             {
+                Type = typeof(I),
                 Lifetime = lifetime,
                 Factory = () => factory.Invoke()
-            };
+            });
+
             return this;
         }
 
         public T Resolve<T>()
         {
-            var type = typeof(T);
-            var instance = Resolve(type);
+            var instance = Resolve(typeof(T));
             return (instance != null) ? (T)instance : default(T);
+        }
+
+        public IEnumerable<T> ResolveMany<T>()
+        {
+            return ResolveMany(typeof(T)).Cast<T>();
         }
 
         public object Resolve(Type type)
         {
-            Registry ci;
-
-            if (!_registry.TryGetValue(type, out ci)) return null;
-
-            if (ci.Instance != null) return ci.Instance;
-
-            if (ci.Lifetime == Lifetime.Transient) return ci.Factory.Invoke();
-
-            if (ci.Lifetime == Lifetime.Singleton)
-            {
-                ci.Instance = ci.Factory.Invoke();
-                return ci.Instance;
-            }
-
-            return null;
+            var entries = _registry.GetEntries(type);
+            if (entries == null || entries.Count == 0) return null;
+            return entries.FirstOrDefault()?.GetInstance();
         }
 
-        sealed class Registry
+        public IEnumerable<object> ResolveMany(Type type)
         {
-            public object Instance { get; set; }
-            public Lifetime Lifetime { get; set; }
-            public Func<object> Factory { get; set; }
+            var entries = _registry.GetEntries(type);
+            if (entries == null || entries.Count == 0) return new object[] { };
+            return entries.Select(x => x.GetInstance());
         }
     }
 }

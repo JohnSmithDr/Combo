@@ -2,10 +2,6 @@ version: 1.0.{build}
 
 init:
 
-    - nuget install OpenCover -OutputDirectory "tools" -ExcludeVersion
-
-    - nuget install coveralls.io -OutputDirectory "tools" -ExcludeVersion
-
 environment:
     COVERALLS_REPO_TOKEN:
        secure: eZiUuzAp3TD92HH2bS6yVNNS1oDtis0bsbWqtBUl1pQeOjyknLm91pZCwaJy+Hfn
@@ -18,6 +14,10 @@ before_build:
 
     - dotnet restore Combo.Core.Tests
 
+    - nuget install OpenCover -OutputDirectory "tools" -ExcludeVersion
+
+    - nuget install coveralls.io -OutputDirectory "tools" -ExcludeVersion
+
 build:
   verbosity: minimal
 
@@ -25,6 +25,8 @@ test_script:
 
     - dotnet test Combo.Core.Tests
 
+after_test:
+
     - tools\OpenCover\tools\OpenCover.Console.exe -oldstyle -register:user -target:dotnet -targetargs:"test Combo.Core.Tests" -output:coverage.xml -filter:"+[*]Combo.* -[*.Tests]* -[xunit.*]*" -skipautoprops -hideskipped:All
-    
+
     - tools\coveralls.io\tools\coveralls.net.exe --opencover coverage.xml

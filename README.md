@@ -1,5 +1,8 @@
 # Combo
 
+[![Build status](https://ci.appveyor.com/api/projects/status/7xq320t9gij0uuqu?svg=true)](https://ci.appveyor.com/project/johnsmith1st/combo)
+[![Coverage Status](https://coveralls.io/repos/github/JohnSmithDr/Combo/badge.svg?branch=master)](https://coveralls.io/github/JohnSmithDr/Combo?branch=master)
+
 A simple implementation of IoC container and dependency injection.
 
 ## Usage

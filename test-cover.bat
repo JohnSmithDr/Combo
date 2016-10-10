@@ -9,6 +9,10 @@ SET filter="+[*]Combo.* -[*.Tests]* -[xunit.*]*"
 SET coveragefile=%cd%\coverage.xml
 SET coveragedir=%cd%\Coverage
 
+echo Buiding ...
+%dotnet% restore Combo.Core Combo.Core.Tests
+%dotnet% build Combo.Core Combo.Core.Tests
+
 echo Test with coverage ...
 
 REM Run code coverage analysis  

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 
 namespace Combo.Tests
@@ -219,6 +220,27 @@ namespace Combo.Tests
             {
                 container.Register<IFoo, Foo>(null, Lifetime.Transient);
             });
+        }
+
+        [Fact]
+        [Trait("Category", "Container")]
+        [Trait("Target", Contracts.Target)]
+        public void TestResolveMany()
+        {
+            var container = new Container();
+            container
+                .Register<ICommon, Foo>(Lifetime.Singleton)
+                .Register<ICommon, Bar>(Lifetime.Singleton);
+
+            Assert.Null(container.Resolve<Foo>());
+            Assert.Null(container.Resolve<IFoo>());
+            Assert.Null(container.Resolve<Bar>());
+            Assert.Null(container.Resolve<IBar>());
+
+            var components = container.ResolveMany<ICommon>();
+            Assert.Equal(2, components.Count());
+            Assert.Equal("Foo", components.ElementAtOrDefault(0)?.Name);
+            Assert.Equal("Bar", components.ElementAtOrDefault(1)?.Name);
         }
     }
 }

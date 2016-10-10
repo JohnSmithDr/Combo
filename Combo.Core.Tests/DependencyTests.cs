@@ -9,6 +9,8 @@ namespace Combo.Tests
             Container.Default
                 .Register<IFoo, Foo>(Lifetime.Singleton)
                 .Register<IBar, Bar>(Lifetime.Singleton)
+                .Register<ICommon, Foo>(Lifetime.Singleton)
+                .Register<ICommon, Bar>(Lifetime.Singleton)
                 .Register<InjectFieldTestCase>(Lifetime.Transient)
                 .Register<InjectPropertyTestCase>(Lifetime.Transient)
                 .Register<IZoo, InjectPropertyTestCase>(Lifetime.Transient);

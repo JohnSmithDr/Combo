@@ -3,6 +3,9 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
+      "coveralls.io/1.3.4": {
+        "type": "package"
+      },
       "dotnet-test-xunit/2.2.0-preview2-build1029": {
         "type": "package",
         "dependencies": {
@@ -2562,6 +2565,30 @@
     }
   },
   "libraries": {
+    "coveralls.io/1.3.4": {
+      "sha512": "LeQN1gLl0Y0DjPPQt3RT+a9Rv1UWTbgfMrr+tREytIxsD3K0dmozJ2Scu2L/GFXSLyc7HHWJbdpbp0lVxHeesw==",
+      "type": "package",
+      "path": "coveralls.io/1.3.4",
+      "files": [
+        "coveralls.io.1.3.4.nupkg.sha512",
+        "coveralls.io.nuspec",
+        "tools/CommandLine.dll",
+        "tools/CommandLine.xml",
+        "tools/Coveralls.dll",
+        "tools/Coveralls.pdb",
+        "tools/LibGit2Sharp.dll",
+        "tools/LibGit2Sharp.xml",
+        "tools/NativeBinaries/amd64/git2-e0902fb.dll",
+        "tools/NativeBinaries/amd64/git2-e0902fb.pdb",
+        "tools/NativeBinaries/x86/git2-e0902fb.dll",
+        "tools/NativeBinaries/x86/git2-e0902fb.pdb",
+        "tools/Newtonsoft.Json.dll",
+        "tools/Newtonsoft.Json.xml",
+        "tools/coveralls.net.exe",
+        "tools/coveralls.net.exe.config",
+        "tools/coveralls.net.pdb"
+      ]
+    },
     "dotnet-test-xunit/2.2.0-preview2-build1029": {
       "sha512": "mPl4HHGcXsE4ljw3sHCOUvlyhXHDpfFO6qz0HbTQrhrFT8Tgm/HFLfz6TpMXUfch7rRL23kR8i0yjQPYdsl6EQ==",
       "type": "package",
@@ -7644,6 +7671,7 @@
       "OpenCover >= 4.6.519",
       "ReportGenerator >= 2.4.5",
       "System.Runtime.Serialization.Primitives >= 4.1.1",
+      "coveralls.io >= 1.3.4",
       "dotnet-test-xunit >= 2.2.0-*",
       "xunit >= 2.2.0-*",
       "xunit.runner.console >= 2.2.0-*"

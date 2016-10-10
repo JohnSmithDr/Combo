@@ -2546,7 +2546,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Combo.Core/1.0.0": {
+      "Combo.Core/1.0.1-preview": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -7632,7 +7632,7 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Combo.Core/1.0.0": {
+    "Combo.Core/1.0.1-preview": {
       "type": "project",
       "path": "../Combo.Core/project.json",
       "msbuildProject": "../Combo.Core/Combo.Core.xproj"
@@ -7640,13 +7640,13 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Combo.Core >= 1.0.0-*",
+      "Combo.Core",
       "OpenCover >= 4.6.519",
       "ReportGenerator >= 2.4.5",
       "System.Runtime.Serialization.Primitives >= 4.1.1",
-      "dotnet-test-xunit >= 2.2.0-preview2-build1029",
-      "xunit >= 2.2.0-beta3-build3402",
-      "xunit.runner.console >= 2.2.0-beta3-build3402"
+      "dotnet-test-xunit >= 2.2.0-*",
+      "xunit >= 2.2.0-*",
+      "xunit.runner.console >= 2.2.0-*"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.1"

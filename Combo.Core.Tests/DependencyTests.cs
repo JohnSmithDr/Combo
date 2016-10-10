@@ -47,9 +47,9 @@ namespace Combo.Tests
             [Dependency]
             IBar _bar = null;
 
-            public string DoFoo() => _foo?.DoFoo();
+            public string DoFoo() => _foo.DoFoo();
 
-            public string DoBar() => _bar?.DoBar();
+            public string DoBar() => _bar.DoBar();
         }
 
         [Dependent]

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.1-preview",
   "name": "Combo",
   "title": "Combo",
   "description": "A simple implementation of IoC container and dependency injection.",
@@ -7,7 +7,7 @@
   "authors": [ "John Smith" ],
   "buildOptions": {
     "define": [ "NET_CORE" ],
-    "debugType": "portable",
+    "debugType": "full",
     "outputName": "Combo"
   },
   "packOptions": {
@@ -21,6 +21,13 @@
   },
   "dependencies": {},
   "frameworks": {
+    "net45": {},
+    "netstandard1.4": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "Microsoft.NETCore.Portable.Compatibility": "1.0.1"
+      }
+    },
     "netstandard1.6": {
       "dependencies": {
         "NETStandard.Library": "1.6.0"
